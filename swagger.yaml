@@ -1,0 +1,237 @@
+openapi: 3.0.0
+info:
+  title: Jobs-API
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://temp-jobs-api-iz75.onrender.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register-user
+      operationId: Register-user
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Register-user-Request'
+              - example:
+                  name: jack7
+                  email: jack22@gmail.com
+                  password: secret
+            example:
+              
+              name: jack7
+              email: jack22@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login-user
+      operationId: Login-user
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/Login-user-Request'
+              - example:
+                  email: hulk77@gmail.com
+                  password: secret
+            example:
+              email: hulk77@gmail.com
+              password: secret
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+      - Jobs
+      summary: Create job
+      operationId: Createjob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreatejobRequest'
+              - example:
+                  company: ibm
+                  position: front-end dev
+            example:
+              company: ibm
+              position: front-end dev
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+    get:
+      tags:
+      - Jobs
+      summary: Get all jobs
+      operationId: Getalljobs
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+      - Jobs
+      summary: get Single job
+      operationId: getSinglejob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+
+    patch:
+      tags:
+      - Jobs
+      summary: Update Job
+      operationId: UpdateJob
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateJobRequest'
+              - example:
+                  company: amazon
+                  position: full-stack dev
+            example:
+              company: amazon
+              position: full-stack dev
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+
+    delete:
+      tags:
+      - Jobs
+      summary: Delete job
+      operationId: Deletejob
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    Register-user-Request:
+      title: Register-user-Request
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: jack7
+        email: jack22@gmail.com
+        password: secret
+    Login-user-Request:
+      title: Login-user-Request
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: hulk77@gmail.com
+        password: secret
+    CreatejobRequest:
+      title: CreatejobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: ibm
+        position: front-end dev
+    UpdateJobRequest:
+      title: UpdateJobRequest
+      required:
+      - company
+      - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: amazon
+        position: full-stack dev
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+
+- name: Auth
+  description: ''
+- name: Jobs
+  description: ''
